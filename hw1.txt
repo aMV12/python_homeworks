@@ -1,0 +1,57 @@
+Задание 1
+
+a = 5
+b = int(input())
+c = input()
+print(a, b, c)
+
+
+Задание 2
+
+a = int(input("Введите время: "))
+hours = a / 3600
+minutes = (a - int(hours) * 3600)/60
+seconds = (a - (int(hours) * 3600 + int(minutes)*60))
+print(f"{int(hours)}:{int(minutes)}:{int(seconds)}")
+
+
+Задание 3
+
+a = input("Введите число: ")
+print(int(a) + int(a + a) + int(a + a + a))
+
+
+Задание 4
+
+a = int(input("Введите число: "))
+r = -1
+while a > 10:
+    d = a % 10
+    a //= 10
+    if d > r:
+        r = d
+print(r)
+
+
+Задание 5
+
+a = int(input("Введите выручки: "))
+b = int(input("Введите издержки: "))
+if a > b:
+    print("Вы в плюсе")
+    print("Ретабельность " + str((a - b) / a))
+    k = int(input("Сколько у вас сотрудников: "))
+    print("Прибль фирмы " + str((a - b) / k))
+else:
+    print("Вы в минусе")
+
+
+Задание 6
+
+a = int(input("Введите км в первый день: "))
+b = int(input("Введите км в последний день: "))
+i = 0
+while a < b:
+    a = a + a / 100 * 10
+    i+=1
+print(i+1)
