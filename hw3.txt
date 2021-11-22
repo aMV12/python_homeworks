@@ -1,0 +1,76 @@
+Задание 1
+
+def sup(a, b):
+    try:
+        print(a/b)
+    except ZeroDivisionError:
+        print("На ноль делить нельзя")
+sup(int(input("Первое число: ")), int(input("Второе число: ")))
+
+
+Задание 2
+
+def person(**per):
+    print(per)
+person(name=input("Имя: "), surname=input("Фамилия: "), birthday=int(input("Год рождения:  ")), city=input("Город: "), mail=input("Почта: "), phone=int(input("Номере телефона: ")))
+
+
+Задание 3
+
+def my_func():
+    list1 = []
+    for i in range(3):
+        list1.append(int(input("Введите число: ")))
+    a = list1.remove(min(list1))
+    print(sum(list1))
+my_func()
+
+
+Задание 4
+
+def my_func1(x, y):
+    print(x**y)
+my_func1(int(input("Первое число: ")), int(input("Второе число: ")))
+
+def my_func2(x, y):
+    a=1
+    for i in range(y):
+        a*=x
+    print(a)
+my_func2(int(input("Первое число: ")), int(input("Второе число: ")))
+
+
+Задание 5
+
+def summ(*nums):
+    sum = 0
+    flag = False
+    for num in nums:
+        try:
+            if num:
+                sum += float(num)
+        except ValueError:
+            flag = True
+    return sum, flag
+
+general_sum = 0
+
+while True:
+    numbers_string = input('Введите числа: ').split(' ')
+    sum, stop_flag = summ(*numbers_string)
+    general_sum += sum
+    print(f'сумма {general_sum}')
+
+    if stop_flag:
+        break
+
+
+Задание 6
+
+def int_func(text):
+    return text.title()
+output_1 = []
+for word in input('Введите строку: ').split(' '):
+    output_1.append(int_func(word))
+
+print(f'Строка: {" ".join(output_1)}')

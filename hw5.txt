@@ -1,0 +1,142 @@
+file2:
+hello fsa
+1
+!!
+hello world
+
+file4:
+
+One — 1
+Two — 2
+Three — 3
+Four — 4
+
+file6:
+Информатика: 100(л) 50(пр) 20(лаб).
+Физика: 30(л) — 10(лаб)
+Физкультура: — 30(пр) —
+
+file7:
+firm_1 ООО 10000 5000
+
+
+Задание 1:
+
+with open("file1", "w", encoding='utf8') as f:
+    while True:
+        a = input("Введите что угодно (пробел - выход из программы): ")
+        if a == " ":
+            break
+        else:
+            print(a, file=f)
+
+
+Задание 2:
+
+with open("file2", "r") as f:
+    list1 = f.readlines()
+    for i in range(len(list1)):
+        a = list1[i].split()
+        print(f' В {i + 1} строке {len(a)} слов')
+    print(f"В файле {len(list1)} строк.")
+
+
+Задание 3:
+
+with open("file3", "r+", encoding='utf8') as f:
+    workers = int(input("Сколько у вас сотрудников: "))
+    staff = {}
+    for i in range(workers):
+        name = input("Введит имя сотрудника: ")
+        salary = int(input("Введите заработную плату сотрудника: "))
+        staff[name] = salary
+    print(staff, file=f)
+    summyry = 0
+    for i in staff:
+        if staff[i] < 20000:
+            print(f"Сотрудники с зп меньше 20000 {i}")
+        summyry+=staff[i]
+    print(f"Средняя зп {summyry/workers}")
+
+
+Задание 4:
+
+listic = {'One': 'Один', 'Two': 'Два', 'Three': 'Три', 'Four': 'Четыре'}
+file = []
+with open('file4', 'r', encoding="utf8") as f:
+    for i in f:
+        i = i.split(' ', 1)
+        file.append(listic[i[0]] + '  ' + i[1])
+    print(file)
+
+with open('file_4_new.txt', 'w', encoding="utf8") as file_obj_2:
+    file_obj_2.writelines(file)
+
+
+Задание 5:
+
+with open('file5', 'w+') as f:
+    line = input('Введите цифры: \n')
+    f.writelines(line)
+    a = line.split()
+
+    print(sum(map(int, a)))
+
+
+Задание 6:
+
+import os, re
+
+DIR = 'files'
+file_to_read_path = os.path.join(DIR, 'task6')
+
+
+def calculate_hours(calc_line: str):
+    line_of_hours = re.sub(r'\D', ' ', calc_line)
+    ttl_hours = 0
+    for hour in line_of_hours.split():
+        ttl_hours += float(hour)
+    return ttl_hours
+
+
+overall_subject_info = {}
+with open("file6", 'r', encoding='utf-8') as file_read:
+    for line in file_read.readlines():
+        listed_line = line.split(': ')
+        overall_subject_info[listed_line[0]] = calculate_hours(listed_line[1])
+
+print(f'Список:\n {overall_subject_info}')
+
+
+Задание 7:
+
+import os, json
+
+DIR = 'files'
+file_to_read_path = os.path.join(DIR, 'task7.txt')
+file_to_write_path = os.path.join(DIR, 'task7.json')
+
+result = []
+profit = {}
+average = []
+
+with open("file7", 'r', encoding='utf-8') as file_read:
+    counter = 1
+    while True:
+        line = file_read.readline().split()
+
+        if not line:
+            break
+
+        profit[line[0]] = float(line[-2]) - float(line[-1])
+
+        if profit[line[0]] > 0:
+            average.append(profit[line[0]])
+
+        counter += 1
+
+
+result = [profit, {'average_profit': sum(average) / len(average)}]
+
+with open("file7", 'w', encoding='utf-8') as file_write:
+    json.dump(result, file_write)

@@ -1,0 +1,85 @@
+Задание 1:
+
+def simple_calc():
+    x = float(input('Введите отработанные часы : '))
+    y = float(input('Введите суммы оплаты труда за 1 час : '))
+    c = float(input('Размер премии - '))
+    pay = x * y
+    return pay + c
+print(f'Размер заработной платы: {simple_calc() }')
+
+
+Задание 2:
+
+def b(a):
+    c=[]
+    if len(a) > 1:
+        if a[0] > a[1]:
+            print(a[0])
+        b(a[1:])
+
+
+b([300, 2, 12, 44, 1, 1, 4, 10, 7, 1, 78, 123, 55])
+
+
+Задание 3:
+
+print(f'кратные:{[i for i in range(20, 241) if i % 20 == 0 or i % 21 == 0]}')
+
+
+Задание 4:
+
+old_list = [2, 2, 2, 7, 23, 1, 44, 44, 3, 2, 10, 7, 4, 11]
+new_list = [i for i in old_list if old_list.count(i) < 2]
+print(new_list)
+
+
+Задание 5:
+
+from functools import reduce
+b = [a for a in range(100, 1001) if a % 2 == 0]
+print(b) 
+
+def func(c, d):
+    return c * d
+print(reduce(func, list))
+
+
+Задание 6:
+
+from itertools import count, cycle
+
+print("Итератор, генерирующий целые числа, начиная с указанного:")
+for item in count(2):
+    if item > 10:
+        break
+    else:
+        print(item)
+
+print("\nИтератор, повторяющий элементы некоторого списка, определенного заранее:")
+a = 0
+for value in cycle([1, 2, 3]):
+    if a > 10:
+        break
+    print(value)
+    a += 1
+
+
+Задание 7:
+
+from itertools import count
+from math import factorial
+
+
+def func():
+    for i in count(1):
+        yield factorial(i)
+
+a = func()
+d = 0
+for c in a:
+    if d < 15:
+        print(c)
+        d += 1
+    else:
+        break

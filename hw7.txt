@@ -1,0 +1,102 @@
+Задание 1
+
+class Matrix:
+    def __init__(self, my_list):
+        self.my_list = my_list
+
+    def __str__(self):
+        for row in self.my_list:
+            for i in row:
+                print(f"{i:4}", end="")
+            print()
+        return ''
+
+
+    def __add__(self, other):
+        for i in range(len(self.my_list)):
+            for i_2 in range(len(other.my_list[i])):
+                self.my_list[i][i_2] = self.my_list[i][i_2] + other.my_list[i][i_2]
+        return Matrix.__str__(self)
+
+
+m = Matrix([[-1, 0, 1], [-1, 0, 1], [0, 1, -1], [1, 1, -1]])
+new_m = Matrix([[-2, 0, 2], [-2, 0, 2], [0, 2, -2], [2, 2, -7]])
+print(m.__add__(new_m))
+
+
+Задание 2
+
+from abc import ABC, abstractmethod
+
+
+class Clothes(ABC):
+
+    def __init__(self, param):
+        self.param = param
+
+    @property
+    def consumption(self):
+        return f'Затрачено: {self.param / 6.5 + 0.5 + 2 * self.param + 0.3 :.2f}'
+
+    @abstractmethod
+    def abstract(self):
+        return 'Smth vary abstract'
+
+
+class Coat(Clothes):
+    def consumption(self):
+        return f'Для пошива пальто: {self.param / 6.5 + 0.5 :.2f} ткани'
+
+    def abstract(self):
+        return 'Smth vary abstract second'
+
+
+class Costume(Clothes):
+    def consumption(self):
+        return f'Для пошива костюма: {2 * self.param + 0.3 :.2f} ткани'
+
+    def abstract(self):
+        pass
+
+
+co = Coat(400)
+cos = Costume(55)
+print(co.consumption)
+print(cos.consumption())
+print(co.abstract())
+
+
+Задание 3
+
+class My:
+    def __init__(self, quantity):
+        self.quantity = int(quantity)
+
+    def __add__(self, other):
+        return f'Размер клетки равен: {self.quantity + other.quantity}'
+
+    def __sub__(self, other):
+        sub = self.quantity - other.quantity
+        return f'Клеточка стала равна: {sub} клеточкам' if sub > 0 else 'Клетка исчезла.'
+
+    def __truediv__(self, other):
+        return self.quantity // other.quantity
+
+    def __mul__(self, other):
+        return self.quantity * other.quantity
+
+    def order(self, row):
+        result = ''
+        for i in range(int(self.quantity / row)):
+            result += '*' * row + '\n'
+        result += '*' * (self.quantity % row) + '\n'
+        return result
+
+
+a = My(24)
+b = My(2)
+print(a + b)
+print(a - b)
+print(a / b)
+print(a * b)
+print(a.order(7))
